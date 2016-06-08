@@ -7,7 +7,8 @@ var extend = require('xtend');
 
 var DEFAULT_OPTS = {
 	profile: null,
-	region: 'us-east-1'
+	region: 'us-east-1',
+	credentials: null
 };
 
 var DEFAULT_PARAMS = {
@@ -69,6 +70,10 @@ module.exports = function(params, opts) {
 
 		if (opts.profile !== null) {
 			AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: opts.profile });
+		}
+
+		if (opts.credentials !== null) {
+			AWS.config.credentials = opts.credentials;
 		}
 
 		AWS.config.update({ region: opts.region });
